@@ -25,8 +25,6 @@ Xml
     android:icon="@mipmap/ic_launcher">
 B. UPDATE PACKAGE NAME (IMPORTANT)
 Example:
-Copy code
-
 com.timwill.napepgo
 ⚠️ Once uploaded, you can never change it
 STEP 3: GENERATE SIGNED APP BUNDLE (AAB)
