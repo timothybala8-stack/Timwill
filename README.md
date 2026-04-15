@@ -74,7 +74,7 @@ SEO-Friendly Description (USE THIS)
 Copy code
 
 Napep Go is a tricycle (Keke Napep) booking app designed for Birnin Kebbi, Kebbi State.
-Passengers can locate riders, negotiate fares, and track rides live using Google Maps.
+Passengers can locate riders, negotiate fares, and track rides live using Google Mapsb41a86ccd1a42a70737d1ee22c626c76563b3ad6
 Riders register with NIN verification for safety.
 STEP 8: SUBMIT FOR REVIEW
 Click Review
