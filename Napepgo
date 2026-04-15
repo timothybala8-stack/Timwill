@@ -1,0 +1,49 @@
+# 🚀 Napep Go: High-Scale Ride-Hailing Architecture
+**Project Lead:** Timothy Bala Williams  
+**Entity:** Timwill Technologies  
+**Region:** Birnin Kebbi, Nigeria  
+
+---
+
+## 🏗️ System Overview
+A professional-grade, event-driven architecture designed for regional transportation logistics, emphasizing **real-time synchronization**, **NIN verification**, and **automated tax enforcement**.
+
+### 1. Mobile Client Stack (Android Studio)
+* **Architecture:** Clean Architecture + MVVM (Model-View-ViewModel).
+* **Language:** Java.
+* **Core Components:**
+    * **Foreground Services:** Persistent GPS polling for rider availability.
+    * **Room Persistence:** Offline caching for trip history and profile data.
+    * **Google Maps SDK:** Real-time route rendering and Geofencing.
+
+### 2. Backend Infrastructure (Serverless)
+* **Hosting:** Firebase / Google Cloud Platform.
+* **Database:** Firestore (NoSQL) for sub-second real-time state updates.
+* **Logic:** Cloud Functions (Node.js) managing ride-matching and pricing.
+* **Identity:** Firebase Auth with NIN-linked verification states.
+
+---
+
+## 🛰️ Key Engineering Logic
+
+### A. Geofencing & Boundary Enforcement
+The system validates every request against a regional polygon.
+- **Inside Boundary:** Proceed to matching.
+- **Outside Boundary:** Return `SERVICE_UNAVAILABLE` status.
+
+### B. Automated Tax Compliance (The "Kill Switch")
+A nightly Cloud Scheduler (CRON) validates rider eligibility:
+$$Status = (Today - LastPaymentDate) \leq 30 Days$$
+If a rider is delinquent, the backend sets `account_status: SUSPENDED`, programmatically disabling their ability to receive orders.
+
+### C. Ride Matching State Machine
+1. **REQUEST:** Passenger writes to `/trips` with `status: searching`.
+2. **BROADCAST:** Cloud Function filters `active_riders` via 6-character Geohashes.
+3. **LOCK:** Atomic transaction assigns `riderId` and updates status to `accepted`.
+
+---
+
+## 🔒 Security Protocol
+* **Firebase App Check:** Prevents unauthorized API access from non-app sources.
+* **Firestore Rules:** Attribute-Based Access Control (ABAC) ensuring users only see their own data.
+* **Crashlytics:** Real-time monitoring of app stability across the Birnin Kebbi device ecosystem.
